@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+  </head>
+
+  <body>
+    <div id="elm-container">
+    </div>
+
+    <!-- <script type="text/javascript" src="index.js"></script> -->
+    <script type="text/javascript" src="index2.js"></script>
+
+    <script type="text/javascript">
+      var node = document.getElementById('elm-container');
+      var app = Elm.Main.embed(node);
+
+      // app.ports.getElementPosition.subscribe(function(id) {
+      //   var position = { x: 1, y: 2 };
+      //   app.ports.returnPosition.send(position);
+      // });
+
+      app.ports.check.subscribe(function(word) {
+        var suggestions = [word.split("").reverse().join("")];
+        app.ports.suggestions.send(suggestions);
+      });
+
+      app.ports.fuck.subscribe(function(word) {
+        console.log(word)
+      });
+    </script>
+  </body>
+</html>

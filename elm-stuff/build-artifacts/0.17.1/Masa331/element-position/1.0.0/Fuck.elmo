@@ -1,0 +1,13 @@
+var _Masa331$element_position$Fuck$fuck = _elm_lang$core$Native_Platform.outgoingPort(
+	'fuck',
+	function (v) {
+		return v;
+	});
+var _Masa331$element_position$Fuck$suggestions = _elm_lang$core$Native_Platform.incomingPort(
+	'suggestions',
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
+var _Masa331$element_position$Fuck$check = _elm_lang$core$Native_Platform.outgoingPort(
+	'check',
+	function (v) {
+		return v;
+	});
