@@ -2729,15 +2729,6 @@ var _elm_lang$core$Platform_Sub$none = _elm_lang$core$Platform_Sub$batch(
 var _elm_lang$core$Platform_Sub$map = _elm_lang$core$Native_Platform.map;
 var _elm_lang$core$Platform_Sub$Sub = {ctor: 'Sub'};
 
-var _Masa331$element_position$ElementPosition$suggestions = _elm_lang$core$Native_Platform.incomingPort(
-	'suggestions',
-	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
-var _Masa331$element_position$ElementPosition$check = _elm_lang$core$Native_Platform.outgoingPort(
-	'check',
-	function (v) {
-		return v;
-	});
-
 //import Native.List //
 
 var _elm_lang$core$Native_Array = function() {
@@ -7415,6 +7406,68 @@ var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
+var _Masa331$element_position$ElementPosition$getPosition = _elm_lang$core$Native_Platform.outgoingPort(
+	'getPosition',
+	function (v) {
+		return v;
+	});
+var _Masa331$element_position$ElementPosition$determinedPositions = _elm_lang$core$Native_Platform.incomingPort(
+	'determinedPositions',
+	_elm_lang$core$Json_Decode$oneOf(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$core$Json_Decode$null(_elm_lang$core$Maybe$Nothing),
+				A2(
+				_elm_lang$core$Json_Decode$map,
+				_elm_lang$core$Maybe$Just,
+				A2(
+					_elm_lang$core$Json_Decode$andThen,
+					A2(_elm_lang$core$Json_Decode_ops[':='], 'x', _elm_lang$core$Json_Decode$int),
+					function (x) {
+						return A2(
+							_elm_lang$core$Json_Decode$andThen,
+							A2(_elm_lang$core$Json_Decode_ops[':='], 'y', _elm_lang$core$Json_Decode$int),
+							function (y) {
+								return A2(
+									_elm_lang$core$Json_Decode$andThen,
+									A2(_elm_lang$core$Json_Decode_ops[':='], 'width', _elm_lang$core$Json_Decode$int),
+									function (width) {
+										return A2(
+											_elm_lang$core$Json_Decode$andThen,
+											A2(_elm_lang$core$Json_Decode_ops[':='], 'height', _elm_lang$core$Json_Decode$int),
+											function (height) {
+												return A2(
+													_elm_lang$core$Json_Decode$andThen,
+													A2(_elm_lang$core$Json_Decode_ops[':='], 'top', _elm_lang$core$Json_Decode$int),
+													function (top) {
+														return A2(
+															_elm_lang$core$Json_Decode$andThen,
+															A2(_elm_lang$core$Json_Decode_ops[':='], 'right', _elm_lang$core$Json_Decode$int),
+															function (right) {
+																return A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	A2(_elm_lang$core$Json_Decode_ops[':='], 'bottom', _elm_lang$core$Json_Decode$int),
+																	function (bottom) {
+																		return A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			A2(_elm_lang$core$Json_Decode_ops[':='], 'left', _elm_lang$core$Json_Decode$int),
+																			function (left) {
+																				return _elm_lang$core$Json_Decode$succeed(
+																					{x: x, y: y, width: width, height: height, top: top, right: right, bottom: bottom, left: left});
+																			});
+																	});
+															});
+													});
+											});
+									});
+							});
+					}))
+			])));
+var _Masa331$element_position$ElementPosition$Position = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {x: a, y: b, width: c, height: d, top: e, right: f, bottom: g, left: h};
+	});
+
 var _elm_lang$html$Html_App$programWithFlags = _elm_lang$virtual_dom$VirtualDom$programWithFlags;
 var _elm_lang$html$Html_App$program = function (app) {
 	return _elm_lang$html$Html_App$programWithFlags(
@@ -7908,15 +7961,11 @@ var _elm_lang$html$Html_Events$Options = F2(
 
 var _Masa331$element_position$Main$Model = F2(
 	function (a, b) {
-		return {word: a, suggestions: b};
+		return {id: a, position: b};
 	});
 var _Masa331$element_position$Main$init = {
 	ctor: '_Tuple2',
-	_0: A2(
-		_Masa331$element_position$Main$Model,
-		'',
-		_elm_lang$core$Native_List.fromArray(
-			[])),
+	_0: A2(_Masa331$element_position$Main$Model, '', _elm_lang$core$Maybe$Nothing),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _Masa331$element_position$Main$update = F2(
@@ -7926,32 +7975,28 @@ var _Masa331$element_position$Main$update = F2(
 			case 'Change':
 				return {
 					ctor: '_Tuple2',
-					_0: A2(
-						_Masa331$element_position$Main$Model,
-						_p0._0,
-						_elm_lang$core$Native_List.fromArray(
-							[])),
+					_0: A2(_Masa331$element_position$Main$Model, _p0._0, model.position),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'Check':
 				return {
 					ctor: '_Tuple2',
 					_0: model,
-					_1: _Masa331$element_position$ElementPosition$check(model.word)
+					_1: _Masa331$element_position$ElementPosition$getPosition(model.id)
 				};
 			default:
 				return {
 					ctor: '_Tuple2',
-					_0: A2(_Masa331$element_position$Main$Model, model.word, _p0._0),
+					_0: A2(_Masa331$element_position$Main$Model, model.id, _p0._0),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
-var _Masa331$element_position$Main$Suggest = function (a) {
-	return {ctor: 'Suggest', _0: a};
+var _Masa331$element_position$Main$PositionDetermined = function (a) {
+	return {ctor: 'PositionDetermined', _0: a};
 };
 var _Masa331$element_position$Main$subscriptions = function (model) {
-	return _Masa331$element_position$ElementPosition$suggestions(_Masa331$element_position$Main$Suggest);
+	return _Masa331$element_position$ElementPosition$determinedPositions(_Masa331$element_position$Main$PositionDetermined);
 };
 var _Masa331$element_position$Main$Check = {ctor: 'Check'};
 var _Masa331$element_position$Main$Change = function (a) {
@@ -7989,7 +8034,7 @@ var _Masa331$element_position$Main$view = function (model) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						_elm_lang$html$Html$text(
-						A2(_elm_lang$core$String$join, ', ', model.suggestions))
+						_elm_lang$core$Basics$toString(model.position))
 					]))
 			]));
 };

@@ -1,3 +1,46 @@
+var _Masa331$element_position$Main$Model = F2(
+	function (a, b) {
+		return {id: a, position: b};
+	});
+var _Masa331$element_position$Main$init = {
+	ctor: '_Tuple2',
+	_0: A2(_Masa331$element_position$Main$Model, '', _elm_lang$core$Maybe$Nothing),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _Masa331$element_position$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Change':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_Masa331$element_position$Main$Model, _p0._0, model.position),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Check':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _Masa331$element_position$ElementPosition$getPosition(model.id)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_Masa331$element_position$Main$Model, model.id, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _Masa331$element_position$Main$PositionDetermined = function (a) {
+	return {ctor: 'PositionDetermined', _0: a};
+};
+var _Masa331$element_position$Main$subscriptions = function (model) {
+	return _Masa331$element_position$ElementPosition$determinedPositions(_Masa331$element_position$Main$PositionDetermined);
+};
+var _Masa331$element_position$Main$Check = {ctor: 'Check'};
+var _Masa331$element_position$Main$Change = function (a) {
+	return {ctor: 'Change', _0: a};
+};
 var _Masa331$element_position$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -5,38 +48,36 @@ var _Masa331$element_position$Main$view = function (model) {
 			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html$text(
-				_elm_lang$core$Basics$toString(model))
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onInput(_Masa331$element_position$Main$Change)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_Masa331$element_position$Main$Check)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Check')
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(model.position))
+					]))
 			]));
-};
-var _Masa331$element_position$Main$update = F2(
-	function (msg, model) {
-		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-	});
-var _Masa331$element_position$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _Masa331$element_position$Main$Model = F2(
-	function (a, b) {
-		return {word: a, suggestions: b};
-	});
-var _Masa331$element_position$Main$init = {
-	ctor: '_Tuple2',
-	_0: A2(
-		_Masa331$element_position$Main$Model,
-		'neco',
-		_elm_lang$core$Native_List.fromArray(
-			[])),
-	_1: _Masa331$element_position$Fuck$fuck('hovno')
 };
 var _Masa331$element_position$Main$main = {
 	main: _elm_lang$html$Html_App$program(
 		{init: _Masa331$element_position$Main$init, view: _Masa331$element_position$Main$view, update: _Masa331$element_position$Main$update, subscriptions: _Masa331$element_position$Main$subscriptions})
-};
-var _Masa331$element_position$Main$Suggest = function (a) {
-	return {ctor: 'Suggest', _0: a};
-};
-var _Masa331$element_position$Main$Check = {ctor: 'Check'};
-var _Masa331$element_position$Main$Change = function (a) {
-	return {ctor: 'Change', _0: a};
 };

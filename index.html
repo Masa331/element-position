@@ -9,25 +9,30 @@
     <div id="elm-container">
     </div>
 
-    <!-- <script type="text/javascript" src="index.js"></script> -->
-    <script type="text/javascript" src="index2.js"></script>
+    <div id="div1" style="border: 1px solid;">
+      ahoj svete
+    </div>
+
+    <br>
+
+    <div id="div2" style="border: 1px solid;">
+      Druhy div
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
 
     <script type="text/javascript">
       var node = document.getElementById('elm-container');
       var app = Elm.Main.embed(node);
 
-      // app.ports.getElementPosition.subscribe(function(id) {
-      //   var position = { x: 1, y: 2 };
-      //   app.ports.returnPosition.send(position);
-      // });
-
-      app.ports.check.subscribe(function(word) {
-        var suggestions = [word.split("").reverse().join("")];
-        app.ports.suggestions.send(suggestions);
-      });
-
-      app.ports.fuck.subscribe(function(word) {
-        console.log(word)
+      app.ports.getPosition.subscribe(function(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          var position = element.getBoundingClientRect();
+          app.ports.determinedPositions.send(position);
+        } else {
+          app.ports.determinedPositions.send(null);
+        }
       });
     </script>
   </body>

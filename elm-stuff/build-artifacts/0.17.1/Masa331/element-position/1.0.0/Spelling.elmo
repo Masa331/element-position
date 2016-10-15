@@ -1,0 +1,99 @@
+var _Masa331$element_position$Spelling$check = _elm_lang$core$Native_Platform.outgoingPort(
+	'check',
+	function (v) {
+		return v;
+	});
+var _Masa331$element_position$Spelling$suggestions = _elm_lang$core$Native_Platform.incomingPort(
+	'suggestions',
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
+var _Masa331$element_position$Spelling$Model = F2(
+	function (a, b) {
+		return {word: a, suggestions: b};
+	});
+var _Masa331$element_position$Spelling$init = {
+	ctor: '_Tuple2',
+	_0: A2(
+		_Masa331$element_position$Spelling$Model,
+		'',
+		_elm_lang$core$Native_List.fromArray(
+			[])),
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _Masa331$element_position$Spelling$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'Change':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(
+						_Masa331$element_position$Spelling$Model,
+						_p0._0,
+						_elm_lang$core$Native_List.fromArray(
+							[])),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Check':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _Masa331$element_position$Spelling$check(model.word)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_Masa331$element_position$Spelling$Model, model.word, _p0._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _Masa331$element_position$Spelling$Suggest = function (a) {
+	return {ctor: 'Suggest', _0: a};
+};
+var _Masa331$element_position$Spelling$subscriptions = function (model) {
+	return _Masa331$element_position$Spelling$suggestions(_Masa331$element_position$Spelling$Suggest);
+};
+var _Masa331$element_position$Spelling$Check = {ctor: 'Check'};
+var _Masa331$element_position$Spelling$Change = function (a) {
+	return {ctor: 'Change', _0: a};
+};
+var _Masa331$element_position$Spelling$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onInput(_Masa331$element_position$Spelling$Change)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_Masa331$element_position$Spelling$Check)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Check')
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						A2(_elm_lang$core$String$join, ', ', model.suggestions))
+					]))
+			]));
+};
+var _Masa331$element_position$Spelling$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _Masa331$element_position$Spelling$init, view: _Masa331$element_position$Spelling$view, update: _Masa331$element_position$Spelling$update, subscriptions: _Masa331$element_position$Spelling$subscriptions})
+};
